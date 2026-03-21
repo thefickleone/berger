@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Preload, useGLTF } from '@react-three/drei';
 
@@ -6,8 +6,8 @@ import CanvasLoader from './components/Loader';
 import ErrorBoundary from './components/ErrorBoundary';
 
 const ComputerModel = () => {
-  // Replace this with your actual model path
-  const computer = useGLTF('./desktop_pc/scene.gltf');
+  // Absolute path for production
+  const computer = useGLTF('/desktop_pc/scene.gltf');
 
   return (
     <mesh>
@@ -31,28 +31,30 @@ const ComputerModel = () => {
   );
 };
 
+// Preload the model so it starts downloading immediately
+useGLTF.preload('/desktop_pc/scene.gltf');
+
 const HeroCanvas = () => {
   return (
     <ErrorBoundary>
-      <Canvas
-        frameloop='demand'
-        shadows
-        dpr={[1, 2]}
-        camera={{ position: [20, 3, 5], fov: 25 }}
-        gl={{ preserveDrawingBuffer: true }}
-        className="w-full h-screen bg-transparent"
-      >
-        <Suspense fallback={<CanvasLoader />}>
-          <OrbitControls
-            enableZoom={false}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 2}
-          />
-          <ComputerModel />
-        </Suspense>
-
-        <Preload all />
-      </Canvas>
+      <div className="w-full h-screen">
+        <Canvas
+          shadows
+          dpr={[1, 2]}
+          camera={{ position: [20, 3, 5], fov: 25 }}
+          gl={{ preserveDrawingBuffer: true }}
+        >
+          <Suspense fallback={<CanvasLoader />}>
+            <OrbitControls
+              enableZoom={false}
+              maxPolarAngle={Math.PI / 2}
+              minPolarAngle={Math.PI / 2}
+            />
+            <ComputerModel />
+          </Suspense>
+          <Preload all />
+        </Canvas>
+      </div>
     </ErrorBoundary>
   );
 };
