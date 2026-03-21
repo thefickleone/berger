@@ -1,13 +1,14 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import ColorPicker from './components/ColorPicker';
 import Navbar from './components/Navbar';
-import ErrorBoundary from './components/ErrorBoundary'; // 💡 Fix: Imported Error Boundary
+import ErrorBoundary from './components/ErrorBoundary';
 
-const HeroCanvas = lazy(() => import('./HeroCanvas'));
-const Visualizer = lazy(() => import('./Visualizer'));
-const ProductSection = lazy(() => import('./ProductSection'));
-const ContactSection = lazy(() => import('./ContactSection'));
+// 💡 Fix: Direct imports instead of lazy(). This prevents Suspense crashes!
+import HeroCanvas from './HeroCanvas';
+import Visualizer from './Visualizer';
+import ProductSection from './ProductSection';
+import ContactSection from './ContactSection';
 
 const App = () => {
   return (
@@ -15,20 +16,15 @@ const App = () => {
       <div className="relative z-0 bg-[#050505] min-h-screen font-sans selection:bg-blue-500/30 text-slate-200"> 
         <Navbar />
         
-        {/* 💡 Fix: Wrapping the risky 3D Canvas in the Error Boundary */}
+        {/* 3D gets an ErrorBoundary so it doesn't kill the whole app if WebGL fails */}
         <ErrorBoundary>
-          <Suspense fallback={<div className="h-screen w-full bg-[#050505]" />}>
-            <HeroCanvas />
-          </Suspense>
+          <HeroCanvas />
         </ErrorBoundary>
 
         <ColorPicker />
-        
-        <Suspense fallback={<div className="h-96 w-full bg-[#050505]" />}>
-          <Visualizer />
-          <ProductSection />
-          <ContactSection />
-        </Suspense>
+        <Visualizer />
+        <ProductSection />
+        <ContactSection />
       </div>
     </ThemeProvider>
   );

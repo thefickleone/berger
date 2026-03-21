@@ -9,9 +9,7 @@ export default {
         tertiary: "#151030",
         "brand-accent": "#2196F3",
       },
-      backgroundImage: {
-        "hero-pattern": "url('/herobg.png')",
-      },
+      // 💡 Fix: Removed background image that doesn't exist
     },
   },
   plugins: [],
