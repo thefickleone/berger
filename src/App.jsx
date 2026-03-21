@@ -1,7 +1,15 @@
-import HeroCanvas from './HeroCanvas';\nimport React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import HeroCanvas from './HeroCanvas';
 
-// Simple Navbar Component with Glassmorphism
+const colors = [
+  { name: 'Berger Gold', hex: '#EAB308' },
+  { name: 'Royal Crimson', hex: '#991b1b' },
+  { name: 'Deep Teal', hex: '#0d9488' },
+  { name: 'Premium Silk', hex: '#f8fafc' },
+  { name: 'Midnight Violet', hex: '#4c1d95' },
+];
+
 const Navbar = () => (
   <nav className="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center backdrop-blur-md bg-black/20 border-b border-white/5">
     <div className="flex items-center gap-2">
@@ -21,34 +29,49 @@ const Navbar = () => (
 );
 
 function App() {
+  const [activeColor, setActiveColor] = useState(colors[0].hex);
+
   return (
-    <div className="relative min-h-screen bg-brand-dark overflow-x-hidden">
-      {/* Background Ambient Light Effects */}
-      <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-accent/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="fixed bottom-[-10%] right-[-10%] w-[30%] h-[30%] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
+    <div className="relative min-h-screen bg-brand-dark overflow-x-hidden transition-colors duration-1000" style={{ backgroundColor: `${activeColor}05` }}>
+      {/* Dynamic Ambient Light */}
+      <div 
+        className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full blur-[120px] pointer-events-none transition-colors duration-1000" 
+        style={{ backgroundColor: `${activeColor}20` }}
+      />
       
       <Navbar />
 
-      <main>
-        {/* Hero Section Placeholder (Next Step) */}
-        <section className="relative h-screen flex flex-col items-center justify-center pt-20 overflow-hidden">\n          <HeroCanvas />
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-6xl md:text-8xl font-black text-center tracking-tighter leading-none"
+      <main className="relative z-10">
+        <section className="relative h-screen flex flex-col items-center justify-center pt-20 overflow-hidden">
+          <HeroCanvas activeColor={activeColor} />
+          
+          <div className="text-center z-20 pointer-events-none">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-6xl md:text-8xl font-black tracking-tighter leading-none"
+            >
+              EXPERIENCE <br />
+              <span style={{ color: activeColor }} className="transition-colors duration-500">COLOR LUXURY</span>
+            </motion.h1>
+          </div>
+
+          {/* Premium Floating Color Picker */}
+          <motion.div 
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="absolute bottom-12 flex gap-4 p-4 rounded-3xl bg-black/40 backdrop-blur-xl border border-white/10 z-30"
           >
-            THE ART OF <br />
-            <span className="text-brand-accent">PREMIUM PAINT</span>
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="mt-6 text-slate-400 text-lg max-w-lg text-center"
-          >
-            Verified Berger Paint shop in Jatra, Birbhum. Bringing futuristic 
-            digital visualization to your home.
-          </motion.p>
+            {colors.map((c) => (
+              <button
+                key={c.hex}
+                onClick={() => setActiveColor(c.hex)}
+                className={`w-10 h-10 rounded-full border-2 transition-all duration-300 ${activeColor === c.hex ? 'scale-125 border-white' : 'border-transparent opacity-50'}`}
+                style={{ backgroundColor: c.hex }}
+                title={c.name}
+              />
+            ))}
+          </motion.div>
         </section>
       </main>
     </div>
