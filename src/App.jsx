@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import ProductSection from './ProductSection';\nimport React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import HeroCanvas from './HeroCanvas';
 
@@ -119,7 +119,7 @@ function App() {
             <div className="aspect-video bg-white/5 rounded-3xl border border-white/10 animate-pulse" />
           </motion.div>
         </section>
-      </main>
+      <ProductSection />\n      </main>
     </div>
   );
 }
