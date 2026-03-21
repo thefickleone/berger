@@ -4,16 +4,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        premium: {
-          bg: "#050505",
-          card: "#121212",
-          accent: "#EAB308", // Berger Gold/Yellow vibe
-          text: "#F8FAFC"
+        brand: {
+          dark: "#050505",    // Deep matte background
+          card: "#0F0F0F",    // Elevated surfaces
+          accent: "#EAB308",  // Berger Gold
+          muted: "#64748b",   // Slate text
         }
       },
-      animation: {
-        'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-      }
+      backgroundImage: {
+        'glass-gradient': "linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%)",
+      },
     },
   },
   plugins: [],
