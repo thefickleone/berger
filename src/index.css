@@ -11,19 +11,40 @@
     @apply bg-brand-dark text-slate-200 antialiased;
     font-family: 'Inter', system-ui, sans-serif;
   }
+  
+  /* Smooth focus states for accessibility */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-accent ring-offset-2 ring-offset-brand-dark;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/5 border border-white/10 backdrop-blur-md;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-b from-white to-white/40;
+  }
 }
 
 /* Custom Premium Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
   background: #050505;
 }
 ::-webkit-scrollbar-thumb {
-  background: #222;
-  border-radius: 10px;
+  background: #1a1a1a;
+  border-radius: 20px;
+  border: 2px solid #050505;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--brand-gold);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
