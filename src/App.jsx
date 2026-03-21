@@ -1,125 +1,90 @@
-import ContactSection from './ContactSection';\nimport Visualizer from './Visualizer';\nimport ProductSection from './ProductSection';\nimport React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import HeroCanvas from './HeroCanvas';
+import React, { useState, Suspense, lazy } from 'react';
+import { motion } from 'framer-motion';
 
-const colors = [
-  { name: 'Berger Gold', hex: '#EAB308' },
-  { name: 'Royal Crimson', hex: '#991b1b' },
-  { name: 'Deep Teal', hex: '#0d9488' },
-  { name: 'Premium Silk', hex: '#f8fafc' },
-  { name: 'Midnight Violet', hex: '#4c1d95' },
-];
+// Lazy load heavy components
+const HeroCanvas = lazy(() => import('./HeroCanvas'));
+const Visualizer = lazy(() => import('./Visualizer'));
+const ProductSection = lazy(() => import('./ProductSection'));
+const ContactSection = lazy(() => import('./ContactSection'));
+
+// Elegant Loading State
+const CanvasLoader = () => (
+  <div className="absolute inset-0 flex items-center justify-center bg-brand-dark">
+    <div className="w-10 h-10 border-2 border-brand-accent/20 border-t-brand-accent rounded-full animate-spin" />
+  </div>
+);
 
 const Navbar = () => (
   <motion.nav 
     initial={{ y: -100 }}
     animate={{ y: 0 }}
-    transition={{ type: "spring", stiffness: 100, damping: 20 }}
     className="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center backdrop-blur-md bg-black/20 border-b border-white/5"
   >
     <div className="flex items-center gap-2">
       <div className="w-8 h-8 bg-brand-accent rounded-full blur-[2px] animate-pulse-slow" />
-      <span className="text-xl font-bold tracking-tighter text-white">FIRDOUS GALLERY</span>
+      <span className="text-xl font-bold tracking-tighter text-white uppercase">Firdous</span>
     </div>
     <div className="hidden md:flex gap-8 text-sm font-medium text-slate-400">
       {['Home', 'Visualizer', 'Products', 'Contact'].map((item) => (
-        <a key={item} href="#" className="hover:text-brand-accent transition-colors relative group">
+        <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-brand-accent transition-colors relative group">
           {item}
-          <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-accent transition-all group-hover:w-full" />
         </a>
       ))}
     </div>
-    <motion.button 
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className="px-5 py-2 bg-brand-accent text-black text-xs font-bold rounded-full shadow-[0_0_20px_rgba(234,179,8,0.3)]"
-    >
+    <button className="px-5 py-2 bg-brand-accent text-black text-xs font-bold rounded-full shadow-lg active:scale-95 transition-transform">
       GET QUOTE
-    </motion.button>
+    </button>
   </motion.nav>
 );
 
 function App() {
-  const [activeColor, setActiveColor] = useState(colors[0].hex);
+  const [activeColor, setActiveColor] = useState('#EAB308');
 
   return (
-    <div className="relative min-h-[200vh] bg-brand-dark overflow-x-hidden transition-colors duration-1000">
-      <div 
-        className="fixed inset-0 opacity-20 pointer-events-none transition-colors duration-1000" 
-        style={{ background: `radial-gradient(circle at 50% 50%, ${activeColor} 0%, transparent 70%)` }}
-      />
-      
+    <div className="relative min-h-screen bg-brand-dark overflow-x-hidden selection:bg-brand-accent selection:text-black">
       <Navbar />
 
       <main className="relative z-10">
-        <section className="relative h-screen flex flex-col items-center justify-center pt-20 overflow-hidden">
-          <HeroCanvas activeColor={activeColor} />
+        {/* Hero Section */}
+        <section id="home" className="relative h-screen flex flex-col items-center justify-center pt-20 overflow-hidden">
+          <Suspense fallback={<CanvasLoader />}>
+            <HeroCanvas activeColor={activeColor} />
+          </Suspense>
           
-          <div className="text-center z-20">
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={{
-                hidden: { opacity: 0 },
-                visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
-              }}
-            >
-              <motion.h1 
-                variants={{ hidden: { y: 30, opacity: 0 }, visible: { y: 0, opacity: 1 } }}
-                className="text-6xl md:text-9xl font-black tracking-tighter leading-[0.9]"
-              >
+          <div className="text-center z-20 pointer-events-none">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+              <h1 className="text-6xl md:text-9xl font-black tracking-tighter leading-[0.9] text-white">
                 THE NEW <br />
-                <span style={{ color: activeColor }} className="transition-colors duration-500 italic">STANDARD</span>
-              </motion.h1>
-              
-              <motion.p 
-                variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
-                className="mt-8 text-slate-400 text-sm md:text-base tracking-[0.2em] uppercase"
-              >
-                Berger Verified Gallery • Jatra, West Bengal
-              </motion.p>
+                <span style={{ color: activeColor }} className="transition-colors duration-1000 italic">STANDARD</span>
+              </h1>
             </motion.div>
           </div>
 
-          <motion.div 
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1 }}
-            className="absolute bottom-12 flex flex-col items-center gap-4"
-          >
-            <span className="text-[10px] text-slate-500 uppercase tracking-widest">Select Finish</span>
+          <div className="absolute bottom-12 flex flex-col items-center gap-4 z-30">
             <div className="flex gap-4 p-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
-              {colors.map((c) => (
+              {['#EAB308', '#991b1b', '#0d9488', '#f8fafc', '#4c1d95'].map((hex) => (
                 <button
-                  key={c.hex}
-                  onClick={() => setActiveColor(c.hex)}
-                  className={`w-8 h-8 rounded-full transition-all duration-500 ${activeColor === c.hex ? 'scale-125 ring-2 ring-white ring-offset-4 ring-offset-black' : 'opacity-40 hover:opacity-100'}`}
-                  style={{ backgroundColor: c.hex }}
+                  key={hex}
+                  onClick={() => setActiveColor(hex)}
+                  className={`w-8 h-8 rounded-full transition-all duration-500 ${activeColor === hex ? 'scale-125 ring-2 ring-white ring-offset-4 ring-offset-black' : 'opacity-40 hover:opacity-100'}`}
+                  style={{ backgroundColor: hex }}
                 />
               ))}
             </div>
-          </motion.div>
+          </div>
         </section>
 
-        {/* New Scroll-Triggered Section Preview */}
-        <section className="py-32 px-10 max-w-7xl mx-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center"
-          >
-            <div className="space-y-6">
-              <h2 className="text-4xl font-bold">Unmatched Durability.</h2>
-              <p className="text-slate-400 leading-relaxed">
-                Using the latest Italian technology from Berger, we provide finishes that 
-                don't just look premium but stay premium for decades.
-              </p>
-            </div>
-            <div className="aspect-video bg-white/5 rounded-3xl border border-white/10 animate-pulse" />
-          </motion.div>
-        </section>
-      <Visualizer activeColor={activeColor} />\n        <ProductSection />\n      <ContactSection />\n        <footer className='py-10 text-center border-t border-white/5'><p className='text-xs text-slate-600'>© 2026 Firdous Gallery. All Rights Reserved.</p></footer>\n      </main>
+        {/* Deferred Sections */}
+        <Suspense fallback={<div className="h-96 bg-brand-dark" />}>
+          <div id="visualizer"><Visualizer activeColor={activeColor} /></div>
+          <div id="products"><ProductSection /></div>
+          <div id="contact"><ContactSection /></div>
+        </Suspense>
+
+        <footer className='py-10 text-center border-t border-white/5'>
+          <p className='text-[10px] text-slate-600 uppercase tracking-widest'>© 2026 Firdous Gallery • Berger Verified</p>
+        </footer>
+      </main>
     </div>
   );
 }
