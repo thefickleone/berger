@@ -1,25 +1,24 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Points, PointMaterial } from '@react-three/drei';
+import { Points, PointMaterial, MeshDistortMaterial, Sphere, Float } from '@react-three/drei';
 import * as random from 'maath/random/dist/maath-random.esm';
 
-const ParticleField = (props) => {
+const ParticleField = () => {
   const ref = useRef();
-  // Generate 2000 points inside a sphere
-  const sphere = useMemo(() => random.inSphere(new Float32Array(3000), { radius: 1.5 }), []);
+  const sphere = random.inSphere(new Float32Array(3000), { radius: 1.5 });
 
   useFrame((state, delta) => {
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
+    ref.current.rotation.x -= delta / 15;
+    ref.current.rotation.y -= delta / 20;
   });
 
   return (
     <group rotation={[0, 0, Math.PI / 4]}>
-      <Points ref={ref} positions={sphere} stride={3} frustumCulled {...props}>
+      <Points ref={ref} positions={sphere} stride={3} frustumCulled>
         <PointMaterial
           transparent
           color="#EAB308"
-          size={0.005}
+          size={0.003}
           sizeAttenuation={true}
           depthWrite={false}
         />
@@ -28,10 +27,32 @@ const ParticleField = (props) => {
   );
 };
 
+const PaintOrb = () => {
+  return (
+    <Float speed={4} rotationIntensity={1} floatIntensity={2}>
+      <Sphere args={[1, 100, 100]} scale={0.5}>
+        <MeshDistortMaterial
+          color="#EAB308"
+          speed={3}
+          distort={0.4}
+          radius={1}
+          metalness={0.8}
+          roughness={0.1}
+        />
+      </Sphere>
+    </Float>
+  );
+};
+
 const HeroCanvas = () => {
   return (
     <div className="absolute inset-0 z-0">
       <Canvas camera={{ position: [0, 0, 1] }}>
+        <ambientLight intensity={0.5} />
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} shadow-mapSize={1024} />
+        <pointLight position={[-10, -10, -10]} color="#EAB308" intensity={1} />
+        
+        <PaintOrb />
         <ParticleField />
       </Canvas>
     </div>
