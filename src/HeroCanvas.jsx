@@ -30,7 +30,7 @@ const ParticleField = ({ color }) => {
 const PaintOrb = ({ color }) => {
   return (
     <Float speed={4} rotationIntensity={1} floatIntensity={2}>
-      <Sphere args={[1, 100, 100]} scale={0.5}>
+      <Sphere args={[1, 100, 100]} scale={window.innerWidth < 768 ? 0.35 : 0.5}>
         <MeshDistortMaterial
           color={color}
           speed={3}
