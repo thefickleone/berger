@@ -1,6 +1,6 @@
-import React, { useRef, useMemo, Component } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Points, PointMaterial, MeshDistortMaterial, Sphere, Float } from '@react-three/drei';
+import CanvasLoader from './components/Loader';\nimport ErrorBoundary from './components/ErrorBoundary';\nimport React, { useRef, useMemo, Component } from 'react';
+import { useState, useEffect, Canvas, useFrame, useThree } from '@react-three/fiber';
+import { useState, useEffect, Points, PointMaterial, MeshDistortMaterial, Sphere, Float } from '@react-three/drei';
 import * as random from 'maath/random/dist/maath-random.esm';
 
 // NEW: Error Boundary Class Component
@@ -20,6 +20,20 @@ class CanvasErrorBoundary extends Component {
 }
 
 const ParticleField = ({ color }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mediaQuery.matches);
+
+    const handleMediaQueryChange = (event) => {
+      setIsMobile(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+    return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
+  }, []);
+
   const ref = useRef();
   const sphere = useMemo(() => random.inSphere(new Float32Array(1500 * 3), { radius: 1.5 }), []);
   useFrame((state, delta) => {
@@ -38,6 +52,20 @@ const ParticleField = ({ color }) => {
 };
 
 const PaintOrb = ({ color }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mediaQuery.matches);
+
+    const handleMediaQueryChange = (event) => {
+      setIsMobile(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+    return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
+  }, []);
+
   const { viewport } = useThree();
   const responsiveScale = Math.min(viewport.width / 4, 0.5);
   return (
@@ -50,10 +78,24 @@ const PaintOrb = ({ color }) => {
 };
 
 const HeroCanvas = ({ activeColor }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mediaQuery.matches);
+
+    const handleMediaQueryChange = (event) => {
+      setIsMobile(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+    return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
+  }, []);
+
   return (
     <div className="absolute inset-0 z-0">
-      <CanvasErrorBoundary>
-        <Canvas 
+      <ErrorBoundary><Canvas performance={{ min: 0.5 }} frameloop="demand"ErrorBoundary>
+        <ErrorBoundary><Canvas performance={{ min: 0.5 }} frameloop="demand" 
           camera={{ position: [0, 0, 1.5], fov: 45 }}
           dpr={[1, 2]}
           gl={{ antialias: true, powerPreference: "high-performance", alpha: true }}
@@ -64,7 +106,7 @@ const HeroCanvas = ({ activeColor }) => {
           
           <PaintOrb color={activeColor} />
           <ParticleField color={activeColor} />
-        </Canvas>
+        </Canvas></ErrorBoundary>
       </CanvasErrorBoundary>
     </div>
   );

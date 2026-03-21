@@ -1,11 +1,12 @@
-import React from 'react';
+import { useTheme } from './context/ThemeContext';\nimport React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Visualizer = ({ activeColor }) => {
+  const { activeColor } = useTheme();
   return (
     <section className="py-24 px-6 bg-brand-dark relative overflow-hidden">
       {/* Background Decorative Element */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-accent/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute inset-0 z-10 top-0 left-1/4 w-96 h-96 bg-brand-accent/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         
@@ -20,7 +21,7 @@ const Visualizer = ({ activeColor }) => {
             <img 
               src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=1200" 
               alt="Luxury Interior" 
-              className="absolute inset-0 w-full h-full object-cover opacity-80 grayscale contrast-125"
+              className="absolute inset-0 z-10 inset-0 w-full h-full object-cover opacity-80 grayscale contrast-125"
             />
             
             {/* 2. The "Smart" Paint Layer */}
@@ -28,7 +29,7 @@ const Visualizer = ({ activeColor }) => {
               initial={false}
               animate={{ backgroundColor: activeColor }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
-              className="absolute inset-0 mix-blend-multiply opacity-70"
+              className="absolute inset-0 z-10 inset-0 mix-blend-multiply opacity-70"
               style={{ 
                 // Using a mask-gradient to simulate light coming from a window
                 maskImage: 'linear-gradient(to right, black 70%, transparent 100%)',
@@ -39,18 +40,18 @@ const Visualizer = ({ activeColor }) => {
             {/* 3. Highlight/Glow Layer - Simulates paint sheen */}
             <motion.div 
               animate={{ backgroundColor: activeColor }}
-              className="absolute inset-0 mix-blend-soft-light opacity-30 pointer-events-none"
+              className="absolute inset-0 z-10 inset-0 mix-blend-soft-light opacity-30 pointer-events-none"
             />
             
             {/* UI Overlays */}
-            <div className="absolute top-6 left-6 flex gap-2">
+            <div className="absolute inset-0 z-10 top-6 left-6 flex gap-2">
               <div className="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full border border-white/10 flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: activeColor }} />
+                <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: activeColor, mixBlendMode: "multiply", opacity: 0.8 }} />
                 <span className="text-[10px] font-bold text-white uppercase tracking-tighter">Live Engine</span>
               </div>
             </div>
 
-            <div className="absolute bottom-8 left-8 right-8 p-6 bg-black/20 backdrop-blur-xl border border-white/5 rounded-2xl">
+            <div className="absolute inset-0 z-10 bottom-8 left-8 right-8 p-6 bg-black/20 backdrop-blur-xl border border-white/5 rounded-2xl">
               <p className="text-[10px] text-brand-accent font-black uppercase tracking-[0.2em] mb-1">Current Selection</p>
               <h4 className="text-xl font-bold text-white tracking-tight">Silk Glamour Luxury Emulsion</h4>
             </div>

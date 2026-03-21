@@ -3,6 +3,29 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Send, CheckCircle2, Phone, MapPin, MessageCircle } from 'lucide-react';
 
 const ContactSection = () => {
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(!form.email.includes('@')) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    setLoading(true);
+    // Simulation of a sent message
+    setTimeout(() => {
+      setLoading(false);
+      alert("Thanks! I'll get back to you soon.");
+      setForm({ name: '', email: '', message: '' });
+    }, 1500);
+  };
+
   // CONFIG: Change this to the actual store number
   const WHATSAPP_NUMBER = "919000000000"; 
   
@@ -10,6 +33,29 @@ const ContactSection = () => {
   const [status, setStatus] = useState('idle'); // idle | sending | success
 
   const handleSubmit = (e) => {
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(!form.email.includes('@')) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+    setLoading(true);
+    // Simulation of a sent message
+    setTimeout(() => {
+      setLoading(false);
+      alert("Thanks! I'll get back to you soon.");
+      setForm({ name: '', email: '', message: '' });
+    }, 1500);
+  };
+
     e.preventDefault();
     if (!formData.name || !formData.email) return alert("Please fill in your details.");
     

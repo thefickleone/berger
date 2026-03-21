@@ -1,11 +1,11 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import { ThemeProvider } from './context/ThemeContext';\nimport React, { useState, useEffect, Suspense, lazy } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ColorProvider, useColor } from './context/ColorContext';
 
-const HeroCanvas = lazy(() => import('./HeroCanvas'));
-const Visualizer = lazy(() => import('./Visualizer'));
-const ProductSection = lazy(() => import('./ProductSection'));
-const ContactSection = lazy(() => import('./ContactSection'));
+const HeroCanvas = lazy(() => import('./HeroCanvas')    </ThemeProvider>\n  );
+const Visualizer = lazy(() => import('./Visualizer')    </ThemeProvider>\n  );
+const ProductSection = lazy(() => import('./ProductSection')    </ThemeProvider>\n  );
+const ContactSection = lazy(() => import('./ContactSection')    </ThemeProvider>\n  );
 
 // Reuse previous Navbar and Loader components...
 const CanvasLoader = () => (
@@ -15,11 +15,23 @@ const CanvasLoader = () => (
       <div className="absolute inset-0 flex items-center justify-center"><div className="w-2 h-2 bg-brand-accent rounded-full animate-pulse" /></div>
     </div>
   </div>
-);
+    </ThemeProvider>\n  );
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
+  const [scrolled, setScrolled] = useState(false    </ThemeProvider>\n  );
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setScrolled(scrollTop > 100    </ThemeProvider>\n  );
+    };
+
+    window.addEventListener("scroll", handleScroll    </ThemeProvider>\n  );
+    return (\n    <ThemeProvider>) => window.removeEventListener("scroll", handleScroll    </ThemeProvider>\n  );
+  }, []    </ThemeProvider>\n  );
+
+  const [isOpen, setIsOpen] = useState(false    </ThemeProvider>\n  );
+  return (\n    <ThemeProvider>
     <nav className="fixed top-0 w-full z-[100] px-4 md:px-8 py-4 backdrop-blur-xl bg-black/40 border-b border-white/5">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center gap-2">
@@ -34,13 +46,13 @@ const Navbar = () => {
         <button className="hidden sm:block px-6 py-2 bg-brand-accent text-black text-[10px] font-black rounded-full uppercase">Get Quote</button>
       </div>
     </nav>
-  );
+      </ThemeProvider>\n  );
 };
 
 const MainContent = () => {
-  const { activeColor, updateColor } = useColor();
+  const { activeColor, updateColor } = useColor(    </ThemeProvider>\n  );
 
-  return (
+  return (\n    <ThemeProvider>
     <main className="relative z-10">
       <section id="home" className="relative h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
         <Suspense fallback={<CanvasLoader />}>
@@ -72,18 +84,18 @@ const MainContent = () => {
       <Suspense fallback={<div className="h-96" />}><ProductSection /></Suspense>
       <Suspense fallback={<div className="h-96" />}><ContactSection /></Suspense>
     </main>
-  );
+      </ThemeProvider>\n  );
 };
 
 function App() {
-  return (
+  return (\n    <ThemeProvider>
     <ColorProvider>
       <div className="relative min-h-screen bg-brand-dark selection:bg-brand-accent selection:text-black">
         <Navbar />
         <MainContent />
       </div>
     </ColorProvider>
-  );
+      </ThemeProvider>\n  );
 }
 
 export default App;
