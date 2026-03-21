@@ -1,4 +1,4 @@
-import React from 'react';
+import HeroCanvas from './HeroCanvas';\nimport React from 'react';
 import { motion } from 'framer-motion';
 
 // Simple Navbar Component with Glassmorphism
@@ -31,7 +31,7 @@ function App() {
 
       <main>
         {/* Hero Section Placeholder (Next Step) */}
-        <section className="h-screen flex flex-col items-center justify-center pt-20">
+        <section className="relative h-screen flex flex-col items-center justify-center pt-20 overflow-hidden">\n          <HeroCanvas />
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
