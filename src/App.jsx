@@ -5,6 +5,7 @@ import ColorPicker from './components/ColorPicker';
 const HeroCanvas = lazy(() => import('./HeroCanvas'));
 const ContactSection = lazy(() => import('./ContactSection'));
 const Visualizer = lazy(() => import('./Visualizer'));
+const ProductSection = lazy(() => import('./ProductSection'));
 
 const SectionLoader = () => (
   <div className="h-96 w-full bg-primary flex items-center justify-center border-t border-white/5">
@@ -27,6 +28,7 @@ const App = () => {
         
         <Suspense fallback={<SectionLoader />}>
           <Visualizer />
+          <ProductSection />
           <ContactSection />
         </Suspense>
       </div>
