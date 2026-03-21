@@ -1,100 +1,39 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
+import { MapPin, Phone, MessageCircle, Star } from 'lucide-react';
 
 const ContactSection = () => {
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!form.email.includes('@')) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-    setLoading(true);
-
-    // Simulation of a successful send
-    setTimeout(() => {
-      setLoading(false);
-      alert("Thank you! I will get back to you as soon as possible.");
-      setForm({ name: '', email: '', message: '' });
-    }, 2000);
-  };
-
   return (
-    <div className="xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden p-8">
-      <motion.div
-        className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
-      >
-        <p className="text-white font-medium mb-4">Get in touch</p>
-        <h3 className="text-white font-bold text-[30px]">Contact.</h3>
-
-        <form onSubmit={handleSubmit} className="mt-12 flex flex-col gap-8">
-          <label className="flex flex-col">
-            <span className="text-white font-medium mb-4">Your Name</span>
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="What's your name?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
-            />
-          </label>
-          <label className="flex flex-col">
-            <span className="text-white font-medium mb-4">Your Email</span>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="What's your web address?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
-            />
-          </label>
-          <label className="flex flex-col">
-            <span className="text-white font-medium mb-4">Your Message</span>
-            <textarea
-              rows={7}
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              placeholder="What you want to say?"
-              className="bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium"
-            />
-          </label>
-
-          <button
-            type="submit"
-            className="bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary"
-          >
-            {loading ? "Sending..." : "Send"}
-          </button>
-        </form>
+    <section id="contact" className="py-24 px-6 max-w-7xl mx-auto">
+      <h2 className="text-4xl md:text-5xl font-black text-white mb-16 text-center">Visit <span className="text-blue-500">Firdous Gallery</span></h2>
+      <div className="flex flex-col lg:flex-row gap-10">
         
-        <div className="mt-10">
-          <a 
-            href="https://wa.me/910000000000" 
-            target="_blank" 
-            rel="noreferrer"
-            className="text-green-500 font-bold underline"
-          >
-            Chat on WhatsApp
-          </a>
+        <div className="flex-1 bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col gap-6">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116833.83187893988!2d87.456!3d23.815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f9b5c!2sBirbhum%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1690000000000!5m2!1sen!2sin" className="w-full h-64 rounded-2xl border-0" loading="lazy"></iframe>
+          <div className="flex items-center gap-4 text-slate-300">
+            <div className="bg-blue-500/20 p-3 rounded-full text-blue-500"><MapPin size={24} /></div>
+            <p className="font-medium text-lg">Jatra, Birbhum, West Bengal</p>
+          </div>
+          <div className="flex gap-4 mt-2">
+            <a href="tel:+919876543210" className="flex-1 flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white py-4 rounded-xl font-bold transition-all"><Phone size={20} /> Call Now</a>
+            <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" className="flex-1 flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white py-4 rounded-xl font-bold transition-all shadow-lg"><MessageCircle size={20} /> WhatsApp</a>
+          </div>
         </div>
-      </motion.div>
-    </div>
+
+        <div className="flex-1 flex flex-col gap-6">
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-8">
+            <div className="flex text-blue-500 mb-4">{[1,2,3,4,5].map(i => <Star key={i} size={16} fill="currentColor" />)}</div>
+            <p className="text-slate-300 italic mb-4">"Best paint shop in Birbhum. The 3D color matching helped me choose the perfect shade for my living room!"</p>
+            <p className="text-white font-bold text-xs uppercase tracking-widest">Rahul S.</p>
+          </div>
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-8">
+            <div className="flex text-blue-500 mb-4">{[1,2,3,4,5].map(i => <Star key={i} size={16} fill="currentColor" />)}</div>
+            <p className="text-slate-300 italic mb-4">"Firdous Gallery provided authentic Berger products with huge discounts. Highly recommend their home delivery."</p>
+            <p className="text-white font-bold text-xs uppercase tracking-widest">Ayesha M.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
   );
 };
-
 export default ContactSection;

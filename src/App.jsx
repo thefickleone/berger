@@ -1,32 +1,23 @@
 import React, { Suspense, lazy } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import ColorPicker from './components/ColorPicker';
+import Navbar from './components/Navbar';
 
 const HeroCanvas = lazy(() => import('./HeroCanvas'));
-const ContactSection = lazy(() => import('./ContactSection'));
 const Visualizer = lazy(() => import('./Visualizer'));
 const ProductSection = lazy(() => import('./ProductSection'));
-
-const SectionLoader = () => (
-  <div className="h-96 w-full bg-primary flex items-center justify-center border-t border-white/5">
-    <div className="text-secondary animate-pulse font-medium tracking-widest uppercase text-xs">
-      Loading Premium Content...
-    </div>
-  </div>
-);
+const ContactSection = lazy(() => import('./ContactSection'));
 
 const App = () => {
   return (
     <ThemeProvider>
-      <div className="relative z-0 bg-primary min-h-screen"> 
-        <div className="relative">
-          <Suspense fallback={<div className="h-screen w-full bg-primary" />}>
-            <HeroCanvas />
-          </Suspense>
-          <ColorPicker />
-        </div>
-        
-        <Suspense fallback={<SectionLoader />}>
+      <div className="relative z-0 bg-[#050505] min-h-screen font-sans selection:bg-blue-500/30 text-slate-200"> 
+        <Navbar />
+        <Suspense fallback={<div className="h-screen w-full bg-[#050505]" />}>
+          <HeroCanvas />
+        </Suspense>
+        <ColorPicker />
+        <Suspense fallback={<div className="h-96 w-full bg-[#050505]" />}>
           <Visualizer />
           <ProductSection />
           <ContactSection />
@@ -35,5 +26,4 @@ const App = () => {
     </ThemeProvider>
   );
 };
-
 export default App;
