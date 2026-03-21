@@ -8,7 +8,9 @@ const ContactSection = () => {
       <div className="flex flex-col lg:flex-row gap-10">
         
         <div className="flex-1 bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col gap-6">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116833.83187893988!2d87.456!3d23.815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f9b5c!2sBirbhum%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1690000000000!5m2!1sen!2sin" className="w-full h-64 rounded-2xl border-0" loading="lazy"></iframe>
+          {/* 💡 Fix: Secure HTTPS Embed URL */}
+          <iframe src="https://maps.google.com/maps?q=Jatra,Birbhum&t=&z=13&ie=UTF8&iwloc=&output=embed" className="w-full h-64 rounded-2xl border-0" loading="lazy"></iframe>
+        
           <div className="flex items-center gap-4 text-slate-300">
             <div className="bg-blue-500/20 p-3 rounded-full text-blue-500"><MapPin size={24} /></div>
             <p className="font-medium text-lg">Jatra, Birbhum, West Bengal</p>
@@ -31,7 +33,6 @@ const ContactSection = () => {
             <p className="text-white font-bold text-xs uppercase tracking-widest">Ayesha M.</p>
           </div>
         </div>
-
       </div>
     </section>
   );

@@ -4,13 +4,13 @@ import { OrbitControls, MeshDistortMaterial, Sphere, Float } from '@react-three/
 import { useTheme } from './context/ThemeContext';
 import CanvasLoader from './components/Loader';
 
-const PaintBlob = () => {
-  const { activeColor } = useTheme();
+// 💡 Fix: Accept color as a prop because Context doesn't cross the <Canvas> bridge automatically!
+const PaintBlob = ({ color }) => {
   return (
     <Float speed={2} rotationIntensity={1.5} floatIntensity={2}>
       <Sphere visible args={[1, 100, 200]} scale={2}>
         <MeshDistortMaterial 
-          color={activeColor} 
+          color={color} 
           attach="material" 
           distort={0.4} 
           speed={2} 
@@ -25,6 +25,9 @@ const PaintBlob = () => {
 };
 
 const HeroCanvas = () => {
+  // 💡 Fix: Call useTheme OUTSIDE the Canvas, where the standard HTML context exists!
+  const { activeColor } = useTheme();
+
   return (
     <div className="w-full h-screen relative">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
@@ -37,7 +40,8 @@ const HeroCanvas = () => {
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 5]} intensity={1.5} />
           <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
-          <PaintBlob />
+          {/* Pass the synced color down as a primitive prop */}
+          <PaintBlob color={activeColor} />
         </Suspense>
       </Canvas>
     </div>
