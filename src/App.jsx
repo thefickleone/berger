@@ -84,7 +84,7 @@ function App() {
               className="text-5xl sm:text-7xl md:text-9xl font-black tracking-tighter leading-[0.85] text-white"
             >
               PREMIUM <br />
-              <span style={{ color: activeColor }} className="transition-colors duration-1000 italic">FINISHES</span>
+              <span style={{ color: activeColor }} className="transition-colors duration-1000 font-serif italic">FINISHES</span>
             </motion.h1>
           </div>
 
