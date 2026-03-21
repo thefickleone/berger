@@ -7,22 +7,22 @@ import CanvasLoader from './components/Loader';
 import ErrorBoundary from './components/ErrorBoundary';
 
 const ComputerModel = ({ isMobile }) => {
-  const computer = useGLTF('/desktop_pc/scene.gltf');
+  const { scene } = useGLTF('/desktop_pc/scene.gltf');
   const { activeColor } = useTheme();
 
+  // Optimization: This allows us to dynamically tint parts of the model 
+  // if needed in the future, but for now, we just render the clean scene.
   return (
     <mesh>
       <hemisphereLight intensity={0.15} groundColor='black' />
       <spotLight position={[-20, 50, 10]} angle={0.12} penumbra={1} intensity={1} castShadow />
       <pointLight intensity={1} />
       <primitive
-        object={computer.scene}
+        object={scene}
         scale={isMobile ? 0.6 : 0.75}
         position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
         rotation={[-0.01, -0.2, -0.1]}
       />
-      {/* This invisible mesh applies the activeColor to the scene logic */}
-      <meshStandardMaterial color={activeColor} />
     </mesh>
   );
 };
@@ -32,7 +32,7 @@ const FallbackBox = () => {
   return (
     <mesh scale={1.5}>
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={activeColor} />
+      <meshStandardMaterial color={activeColor} wireframe />
     </mesh>
   );
 };
@@ -60,7 +60,6 @@ const HeroCanvas = () => {
           gl={{ preserveDrawingBuffer: true }}
           performance={{ min: 0.5 }}
         >
-          {/* Changed fallback to FallbackBox for better UX */}
           <Suspense fallback={<FallbackBox />}>
             <OrbitControls enableZoom={false} maxPolarAngle={Math.PI / 2} minPolarAngle={Math.PI / 2} />
             <Float speed={1.75} rotationIntensity={1} floatIntensity={2}>

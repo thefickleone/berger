@@ -84,7 +84,7 @@ const ContactSection = () => {
         
         <div className="mt-10">
           <a 
-            href="https://wa.me/911234567890" 
+            href="https://wa.me/910000000000" 
             target="_blank" 
             rel="noreferrer"
             className="text-green-500 font-bold underline"
