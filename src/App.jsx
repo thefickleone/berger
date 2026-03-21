@@ -1,4 +1,4 @@
-import Visualizer from './Visualizer';\nimport ProductSection from './ProductSection';\nimport React, { useState } from 'react';
+import ContactSection from './ContactSection';\nimport Visualizer from './Visualizer';\nimport ProductSection from './ProductSection';\nimport React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import HeroCanvas from './HeroCanvas';
 
@@ -119,7 +119,7 @@ function App() {
             <div className="aspect-video bg-white/5 rounded-3xl border border-white/10 animate-pulse" />
           </motion.div>
         </section>
-      <Visualizer activeColor={activeColor} />\n        <ProductSection />\n      </main>
+      <Visualizer activeColor={activeColor} />\n        <ProductSection />\n      <ContactSection />\n        <footer className='py-10 text-center border-t border-white/5'><p className='text-xs text-slate-600'>© 2026 Firdous Gallery. All Rights Reserved.</p></footer>\n      </main>
     </div>
   );
 }
