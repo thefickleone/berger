@@ -17,7 +17,7 @@ const SectionLoader = () => (
 const App = () => {
   return (
     <ThemeProvider>
-      <div className="relative z-0 bg-primary"> 
+      <div className="relative z-0 bg-primary min-h-screen"> 
         <div className="relative">
           <Suspense fallback={<div className="h-screen w-full bg-primary" />}>
             <HeroCanvas />
