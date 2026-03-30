@@ -11,7 +11,6 @@ export const metadata: Metadata = buildPageMetadata({
   description:
     "Firdous Gallery helps homeowners choose authentic Berger paints with trusted local guidance and quick quote support.",
   path: "/",
-  imagePath: "/og/home.svg",
 });
 
 export default function Home() {

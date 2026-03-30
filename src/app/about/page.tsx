@@ -8,7 +8,6 @@ export const metadata: Metadata = buildPageMetadata({
   description:
     "Learn about Firdous Gallery, an authorized Berger Paints dealer serving homeowners in Jatra, Birbhum.",
   path: "/about",
-  imagePath: "/og/about.svg",
 });
 
 export default function AboutPage() {

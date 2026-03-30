@@ -7,7 +7,6 @@ export const metadata: Metadata = buildPageMetadata({
   description:
     "Explore interior paints, exterior paints, primers, and waterproofing solutions available at Firdous Gallery.",
   path: "/products",
-  imagePath: "/og/products.svg",
 });
 
 export default function ProductsPage() {

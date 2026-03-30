@@ -7,7 +7,6 @@ export const metadata: Metadata = buildPageMetadata({
   description:
     "Submit your painting requirement and receive a personalized Berger product recommendation from Firdous Gallery.",
   path: "/quote",
-  imagePath: "/og/quote.svg",
 });
 
 export default function QuotePage() {

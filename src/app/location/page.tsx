@@ -7,7 +7,6 @@ export const metadata: Metadata = buildPageMetadata({
   description:
     "Find directions to Firdous Gallery in Jatra, Birbhum and visit our store for Berger paints.",
   path: "/location",
-  imagePath: "/og/location.svg",
 });
 
 export default function LocationPage() {
