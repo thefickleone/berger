@@ -16,11 +16,12 @@ export function WhatsAppFab() {
       initial={{ opacity: 0, scale: 0.85, y: 12 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ delay: 0.3, duration: 0.45, ease: "easeOut" }}
-      className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-4 py-3 text-sm font-semibold text-white shadow-2xl shadow-emerald-900/25 transition-transform duration-200 hover:-translate-y-1"
+      whileHover={{ scale: 1.08, y: -4 }}
+      whileTap={{ scale: 0.96 }}
+      className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-4 py-3 text-sm font-semibold text-white shadow-2xl shadow-emerald-900/30 transition-all duration-200 sm:bottom-8 sm:right-8 md:px-5 md:py-3.5 md:text-base"
     >
-      <MessageCircle size={18} aria-hidden="true" />
-      WhatsApp
+      <MessageCircle size={18} aria-hidden="true" className="md:h-5 md:w-5" />
+      <span className="hidden sm:inline">WhatsApp</span>
     </motion.a>
   );
 }
-

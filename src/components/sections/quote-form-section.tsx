@@ -19,22 +19,22 @@ export function QuoteFormSection({ title = "Get Your Free Quote", compact = fals
 
   return (
     <section className={cn("glass-card glow-card overflow-hidden p-6 md:p-8", compact && "p-5 md:p-6")}>
-      <div className="grid gap-8 md:grid-cols-[0.86fr_1fr] md:gap-10">
+      <div className="grid gap-6 sm:gap-7 md:gap-8 md:grid-cols-[0.86fr_1fr] md:gap-10">
         <div className="space-y-5">
-          <h2 className="text-3xl leading-tight md:text-4xl">{title}</h2>
-          <p className="text-sm text-subtle-foreground md:text-base">
+          <h2 className="text-2xl sm:text-3xl leading-tight md:text-4xl">{title}</h2>
+          <p className="text-xs sm:text-sm text-subtle-foreground md:text-base">
             Share your requirement in under a minute. Get tailored Berger suggestions, quantity estimates,
             and a fast callback from our team.
           </p>
 
           <div className="space-y-3">
             <div className="glass-soft p-4">
-              <p className="text-sm font-semibold text-foreground">Premium Product Guidance</p>
-              <p className="mt-1 text-xs text-muted-foreground">Interior, exterior, primers, and waterproofing plans</p>
+              <p className="text-xs sm:text-sm font-semibold text-foreground">Premium Product Guidance</p>
+              <p className="mt-1 text-[10px] sm:text-xs text-muted-foreground">Interior, exterior, primers, and waterproofing plans</p>
             </div>
             <div className="glass-soft p-4">
-              <p className="text-sm font-semibold text-foreground">Local Expert Support</p>
-              <p className="mt-1 text-xs text-muted-foreground">Assistance tailored for homes in Jatra and Birbhum</p>
+              <p className="text-xs sm:text-sm font-semibold text-foreground">Local Expert Support</p>
+              <p className="mt-1 text-[10px] sm:text-xs text-muted-foreground">Assistance tailored for homes in Jatra and Birbhum</p>
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@ export function QuoteFormSection({ title = "Get Your Free Quote", compact = fals
             <input
               value={formData.fullName}
               onChange={(event: ChangeEvent<HTMLInputElement>) => updateField("fullName", event.target.value)}
-              className="w-full rounded-xl border border-white/85 bg-white/85 px-4 py-3 text-sm outline-none transition-all duration-200 focus:border-primary focus:bg-white"
+              className="w-full rounded-lg sm:rounded-xl border border-white/85 bg-white/85 px-3 py-2 text-xs sm:px-4 sm:py-3 sm:text-sm outline-none transition-all duration-200 focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20"
               placeholder="Your full name"
               autoComplete="name"
               required
@@ -57,7 +57,7 @@ export function QuoteFormSection({ title = "Get Your Free Quote", compact = fals
             <input
               value={formData.phone}
               onChange={(event: ChangeEvent<HTMLInputElement>) => updateField("phone", event.target.value)}
-              className="w-full rounded-xl border border-white/85 bg-white/85 px-4 py-3 text-sm outline-none transition-all duration-200 focus:border-primary focus:bg-white"
+              className="w-full rounded-lg sm:rounded-xl border border-white/85 bg-white/85 px-3 py-2 text-xs sm:px-4 sm:py-3 sm:text-sm outline-none transition-all duration-200 focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20"
               placeholder="Your phone number"
               autoComplete="tel"
               required
@@ -71,7 +71,7 @@ export function QuoteFormSection({ title = "Get Your Free Quote", compact = fals
               onChange={(event: ChangeEvent<HTMLSelectElement>) =>
                 updateField("inquiryType", event.target.value as (typeof formData)["inquiryType"])
               }
-              className="w-full rounded-xl border border-white/85 bg-white/85 px-4 py-3 text-sm outline-none transition-all duration-200 focus:border-primary focus:bg-white"
+              className="w-full rounded-lg sm:rounded-xl border border-white/85 bg-white/85 px-3 py-2 text-xs sm:px-4 sm:py-3 sm:text-sm outline-none transition-all duration-200 focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20"
             >
               {options.map((option) => (
                 <option key={option} value={option}>
@@ -86,7 +86,7 @@ export function QuoteFormSection({ title = "Get Your Free Quote", compact = fals
             <textarea
               value={formData.message}
               onChange={(event: ChangeEvent<HTMLTextAreaElement>) => updateField("message", event.target.value)}
-              className="min-h-28 w-full rounded-xl border border-white/85 bg-white/85 px-4 py-3 text-sm outline-none transition-all duration-200 focus:border-primary focus:bg-white"
+              className="min-h-24 sm:min-h-28 w-full rounded-lg sm:rounded-xl border border-white/85 bg-white/85 px-3 py-2 text-xs sm:px-4 sm:py-3 sm:text-sm outline-none transition-all duration-200 focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20"
               placeholder="Tell us what you need help with"
               required
             />
