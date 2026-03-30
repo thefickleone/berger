@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Firdous Gallery Website
 
-## Getting Started
+Premium modern lead-generation website for an authorized Berger Paints dealer in Jatra, Birbhum, West Bengal.
 
-First, run the development server:
+## Stack
+
+- Next.js (App Router) + TypeScript
+- Tailwind CSS v4 (CSS-first tokens)
+- Framer Motion
+- Supabase
+
+## Local Development
+
+Install dependencies and run dev server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build and lint:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run lint
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment Variables
 
-## Learn More
+Create `.env.local` from `.env.example` and set values:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Supabase Table
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The `/api/leads` route inserts records into a `leads` table. Suggested schema:
 
-## Deploy on Vercel
+```sql
+create table if not exists public.leads (
+  id bigint generated always as identity primary key,
+  full_name text not null,
+  phone text not null,
+  inquiry_type text not null,
+  message text not null,
+  source text default 'website',
+  created_at timestamptz default now()
+);
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Current Pages
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `/` Home
+- `/about`
+- `/products`
+- `/contact`
+- `/location`
+- `/quote`
+
+## Notes
+
+- Replace placeholder business phone and WhatsApp number in `src/lib/constants.ts`.
+- Replace placeholder SVG assets in `public/` with real project photography when available.
+- Update `NEXT_PUBLIC_SITE_URL` before production deploy so canonical, Open Graph, `sitemap.xml`, and `robots.txt` point to your live domain.
+- Route-specific social preview images are stored in `public/og/`.
+- LocalBusiness JSON-LD is injected from `src/app/layout.tsx` via helpers in `src/lib/seo.ts`.
