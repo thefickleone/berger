@@ -11,10 +11,10 @@ type SectionShellProps = {
 
 export function SectionShell({ id, title, description, className, children }: SectionShellProps) {
   return (
-    <section id={id} className={cn("py-14 md:py-20", className)}>
-      <div className="mb-8 max-w-2xl md:mb-12">
-        <h2 className="text-3xl leading-tight md:text-4xl">{title}</h2>
-        {description ? <p className="mt-3 text-base md:text-lg">{description}</p> : null}
+    <section id={id} className={cn("py-16 md:py-24", className)}>
+      <div className="mb-10 max-w-3xl md:mb-14">
+        <h2 className="text-4xl leading-tight md:text-5xl">{title}</h2>
+        {description ? <p className="mt-4 text-base text-subtle-foreground md:text-lg">{description}</p> : null}
       </div>
       {children}
     </section>

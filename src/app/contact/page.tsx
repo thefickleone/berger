@@ -23,11 +23,11 @@ export default function ContactPage() {
           </p>
           <div className="mt-5 space-y-2 text-sm">
             <p>
-              <span className="font-semibold text-[var(--color-charcoal-900)]">Phone: </span>
+              <span className="font-semibold text-foreground">Phone: </span>
               {BUSINESS.phoneDisplay}
             </p>
             <p>
-              <span className="font-semibold text-[var(--color-charcoal-900)]">Instagram: </span>
+              <span className="font-semibold text-foreground">Instagram: </span>
               <a href={BUSINESS.instagramUrl} target="_blank" rel="noreferrer" className="underline">
                 @bergerpaintsindia
               </a>
@@ -43,13 +43,13 @@ export default function ContactPage() {
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
               href="/location"
-              className="rounded-full bg-[var(--color-luxury-blue)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--color-charcoal-900)]"
+              className="rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-foreground"
             >
               Visit Shop
             </Link>
             <Link
               href="/quote"
-              className="glass-soft rounded-full px-5 py-3 text-sm font-semibold text-[var(--color-charcoal-900)] transition hover:-translate-y-0.5"
+              className="glass-soft rounded-full px-5 py-3 text-sm font-semibold text-foreground transition hover:-translate-y-0.5"
             >
               Request Quote
             </Link>

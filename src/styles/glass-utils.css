@@ -1,7 +1,7 @@
 @utility glass-card {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  border-radius: var(--radius-card);
+  border-radius: var(--radius-xl);
   box-shadow: var(--glass-shadow), var(--glass-highlight);
   backdrop-filter: blur(var(--blur-strong));
   -webkit-backdrop-filter: blur(var(--blur-strong));
@@ -27,5 +27,46 @@
 
 @utility premium-ring {
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-luxury-blue) 45%, white 55%);
+}
+
+@utility premium-lift {
+  transition: transform var(--transition-luxury), box-shadow var(--transition-luxury);
+}
+
+.premium-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--glass-shadow-strong);
+}
+
+@utility glow-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-card::before {
+  content: "";
+  position: absolute;
+  inset: -35% auto auto -25%;
+  width: 65%;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(109, 134, 255, 0.35), transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+@utility cinematic-section {
+  position: relative;
+  isolation: isolate;
+}
+
+.cinematic-section::after {
+  content: "";
+  position: absolute;
+  inset: 10% -12% auto;
+  height: 200px;
+  background: radial-gradient(circle at center, rgba(75, 111, 255, 0.14), transparent 70%);
+  filter: blur(24px);
+  z-index: -1;
 }
 

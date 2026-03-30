@@ -41,7 +41,7 @@ export default function AboutPage() {
 
       <Link
         href="/quote"
-        className="inline-flex rounded-full bg-[var(--color-luxury-blue)] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[var(--color-charcoal-900)]"
+        className="inline-flex rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-foreground"
       >
         Request a Quote
       </Link>

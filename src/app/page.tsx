@@ -16,14 +16,15 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function Home() {
   return (
-    <div>
+    <div className="space-y-2 pb-8">
       <HeroSection />
       <BeforeAfterSection />
       <ProductShowcaseSection />
       <SectionShell
         id="quote"
-        title="Ready to Upgrade Your Home Finish?"
-        description="Get a call back with product suggestions, quantity planning, and the right Berger range for your requirement."
+        className="cinematic-section"
+        title="Ready to Give Your Home a Premium Finish?"
+        description="Share your requirement and receive curated product guidance, quantity planning, and a quick callback from our team."
       >
         <QuoteFormSection compact />
       </SectionShell>

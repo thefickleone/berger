@@ -14,12 +14,9 @@ body {
 
 body {
   margin: 0;
-  background:
-    radial-gradient(circle at 0% 0%, rgba(52, 84, 209, 0.08), transparent 38%),
-    radial-gradient(circle at 100% 100%, rgba(142, 166, 255, 0.13), transparent 42%),
-    var(--color-premium-white);
+  background: var(--gradient-cinematic);
   color: var(--color-charcoal-900);
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -28,7 +25,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-playfair), serif;
+  font-family: var(--font-display);
   color: var(--color-charcoal-900);
   letter-spacing: -0.015em;
 }
@@ -47,3 +44,37 @@ a {
 ::selection {
   background: color-mix(in srgb, var(--color-luxury-blue) 24%, white 76%);
 }
+
+.luxury-float {
+  animation: luxury-float 7s ease-in-out infinite;
+}
+
+.luxury-pulse {
+  animation: luxury-pulse 3.8s ease-in-out infinite;
+}
+
+.depth-stage {
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+
+@keyframes luxury-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes luxury-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(95, 126, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 80px 0 rgba(95, 126, 255, 0.3);
+  }
+}
+
