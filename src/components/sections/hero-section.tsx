@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export function HeroSection() {
   return (
-    <section className="cinematic-section relative min-h-[92vh] overflow-hidden pt-6 sm:pt-8 md:min-h-[100vh] md:pt-12 lg:pt-14">
+    <section className="cinematic-section relative min-h-[92vh] overflow-hidden pt-6 sm:pt-8 md:min-h-screen md:pt-12 lg:pt-14">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

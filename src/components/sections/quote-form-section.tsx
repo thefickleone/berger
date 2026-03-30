@@ -19,7 +19,7 @@ export function QuoteFormSection({ title = "Get Your Free Quote", compact = fals
 
   return (
     <section className={cn("glass-card glow-card overflow-hidden p-6 md:p-8", compact && "p-5 md:p-6")}>
-      <div className="grid gap-6 sm:gap-7 md:gap-8 md:grid-cols-[0.86fr_1fr] md:gap-10">
+      <div className="grid gap-6 sm:gap-7 md:gap-10 md:grid-cols-[0.86fr_1fr]">
         <div className="space-y-5">
           <h2 className="text-2xl sm:text-3xl leading-tight md:text-4xl">{title}</h2>
           <p className="text-xs sm:text-sm text-subtle-foreground md:text-base">
